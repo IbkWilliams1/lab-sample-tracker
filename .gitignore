@@ -1,0 +1,13 @@
+node_modules/
+.env
+.DS_Store
+npm-debug.log
+
+# Database files
+db/*.db
+*.sqlite
+*.sqlite3
+
+# Backup files
+*.backup.*
+*.bak

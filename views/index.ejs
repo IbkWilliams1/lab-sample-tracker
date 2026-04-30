@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sample Store Register V3.1</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Sample Store Register V3.1</h1>
+    <p>Version 3.1 adds progressive Lab ID numbering across all tank entries.</p>
+
+    <form id="batchForm">
+      <div class="section-title">Batch Header Details</div>
+
+      <div class="grid">
+        <div>
+          <label for="date">Date</label>
+          <input type="date" id="date" required />
+        </div>
+
+        <div>
+          <label for="labPrefix">Lab ID Prefix</label>
+          <input type="text" id="labPrefix" value="INSP/04" required />
+        </div>
+
+        <div>
+          <label for="labSuffix">Lab ID Suffix</label>
+          <input type="text" id="labSuffix" value="TG26" required />
+        </div>
+
+        <div>
+          <label for="startingSerial">Starting Serial</label>
+          <input type="number" id="startingSerial" value="1200" min="1" required />
+          <div class="hint">Next available serial based on current saved entries.</div>
+        </div>
+
+        <div>
+          <label for="vessel">Vessel</label>
+          <input type="text" id="vessel" placeholder="e.g. ONYX ORCA" required />
+        </div>
+
+        <div>
+          <label for="operationStage">Operation Stage</label>
+          <select id="operationStage" required>
+            <option value="">Select operation stage</option>
+            <option value="Before Discharge">Before Discharge</option>
+            <option value="After Discharge">After Discharge</option>
+            <option value="Before Loading">Before Loading</option>
+            <option value="After Loading">After Loading</option>
+            <option value="Before Additivation">Before Additivation</option>
+            <option value="After Additivation">After Additivation</option>
+            <option value="Before Transfer">Before Transfer</option>
+            <option value="After Transfer">After Transfer</option>
+            <option value="Before Blending">Before Blending</option>
+            <option value="After Blending">After Blending</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="customOperationStage">Custom Operation Stage</label>
+          <input type="text" id="customOperationStage" placeholder="Use only if 'Other' is selected" />
+        </div>
+
+        <div>
+          <label for="relatedParty">Related Vessel / Destination / Source</label>
+          <input type="text" id="relatedParty" placeholder="e.g. PANTELIS, Shore Tank" />
+        </div>
+
+        <div>
+          <label for="client">Client</label>
+          <input type="text" id="client" placeholder="Client name" required />
+        </div>
+
+        <div>
+          <label for="cargo">Cargo</label>
+          <input type="text" id="cargo" placeholder="e.g. AGO, PMS, Jet A-1" required />
+        </div>
+
+        <div>
+          <label for="port">Port</label>
+          <select id="port" required>
+            <option value="">Select port/source route</option>
+            <option value="O/S Lagos">O/S Lagos</option>
+            <option value="O/S Lome">O/S Lome</option>
+            <option value="Brought by Client">Brought by Client</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="dateSampled">Date Sampled</label>
+          <input type="date" id="dateSampled" required />
+        </div>
+
+        <div>
+          <label for="dateReceived">Date Received</label>
+          <input type="date" id="dateReceived" required />
+        </div>
+
+        <div>
+          <label for="samplingMethod">Sampling Method</label>
+          <select id="samplingMethod" required>
+            <option value="">Select sampling method</option>
+            <option value="ASTM D4057">ASTM D4057</option>
+            <option value="N/A">N/A</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="chemist">Chemist</label>
+          <input type="text" id="chemist" placeholder="Chemist name" required />
+        </div>
+
+        <div>
+          <label for="surveyor">Surveyor</label>
+          <input type="text" id="surveyor" placeholder="Surveyor name" />
+        </div>
+      </div>
+
+      <label>Auto-generated Batch Description</label>
+      <div class="preview" id="descriptionPreview">Description preview will appear here.</div>
+
+      <div class="section-title">Tank Layout Generator</div>
+
+      <div class="tank-controls">
+        <div>
+          <label for="rowCount">Number of Rows</label>
+          <input type="number" id="rowCount" min="1" max="12" value="6" />
+        </div>
+
+        <div>
+          <label for="slopCount">Number of Slop Tanks</label>
+          <input type="number" id="slopCount" min="0" max="4" value="0" />
+        </div>
+      </div>
+
+      <div class="checkbox-row">
+        <label><input type="checkbox" id="hasPort" checked /> Port</label>
+        <label><input type="checkbox" id="hasCenter" /> Center</label>
+        <label><input type="checkbox" id="hasStarboard" checked /> Starboard</label>
+      </div>
+
+      <button type="button" id="generateTanksBtn">Generate Tank Rows</button>
+
+      <div class="section-title">Generated Tank Entries</div>
+      <div id="tankRows">
+        <p>No tank rows generated yet.</p>
+      </div>
+
+      <button type="submit">Save Batch Sample Records</button>
+    </form>
+
+    <div id="messageBox" class="message"></div>
+
+    <div class="links">
+      <a href="/dashboard">View Dashboard</a>
+    </div>
+  </div>
+
+  <script src="/js/batch-form.js"></script>
+</body>
+</html>
