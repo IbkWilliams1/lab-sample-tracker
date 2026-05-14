@@ -32,7 +32,13 @@
 
         <div>
           <label for="startingSerial">Starting Serial</label>
-          <input type="number" id="startingSerial" value="1200" min="1" required />
+          <input
+            type="number"
+            id="startingSerial"
+            value="<%= nextSerial %>"
+            min="1"
+            readonly
+          />
           <div class="hint">Next available serial based on current saved entries.</div>
         </div>
 

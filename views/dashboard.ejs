@@ -1,13 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab Sample Tracker Dashboard</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <h1>Dashboard</h1>
-  <p>Dashboard page is working.</p>
-  <a href="/">Back home</a>
+  <div class="container">
+    <h1>Lab Sample Tracker Dashboard</h1>
+    <p><a href="/">New Batch Entry</a></p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Lab ID</th>
+            <th>Sample Description</th>
+            <th>Vessel</th>
+            <th>Operation Stage</th>
+            <th>Related Party</th>
+            <th>Client</th>
+            <th>Cargo</th>
+            <th>Tank</th>
+            <th>Port</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (samples.length === 0) { %>
+            <tr>
+              <td colspan="13" style="text-align:center;">No sample records yet.</td>
+            </tr>
+          <% } else { %>
+            <% samples.forEach((item, index) => { %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= item.date %></td>
+                <td><%= item.labId %></td>
+                <td><%= item.sampleDescription %></td>
+                <td><%= item.vessel %></td>
+                <td><%= item.operationStage %></td>
+                <td><%= item.relatedParty || '-' %></td>
+                <td><%= item.client %></td>
+                <td><%= item.cargo %></td>
+                <td><%= item.source %></td>
+                <td><%= item.port %></td>
+                <td><%= item.status %></td>
+                <td><a href="/samples/<%= item.id %>">View</a></td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </body>
 </html>
