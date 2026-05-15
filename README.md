@@ -42,33 +42,40 @@ This application provides a foundation for improving:
 
 ### Current Features
 
-- Sample registration form
-- Capture of vessel/sample details
-- Lab ID recording
-- Client and cargo information
-- Port/source information
-- Sample volume entry
-- Sampling method entry
-- Chemist/surveyor details
-- Sample description preview
-- Tank-based sample entry structure
-- Backend API support for sample data handling
+- Batch sample registration form
+- Capture of vessel, client, cargo, port, and chemist details
+- Auto-generated sequential Lab IDs backed by SQLite
+- Tank-based sample entry workflow
+- Dashboard view of registered samples
+- Sample details page for individual records
+- Quantity-aware movement logging
+- Sample movement history tracking
+- SQLite-backed persistence
+- Backend API support for sample handling and movement updates
 
 ### Planned Features
 
-- Search samples by Lab ID, vessel, client, cargo, or date
-- Auto-generated sequential Lab IDs
-- Sample storage location tracking by shelf, row, and position
+- Search and filter samples by Lab ID, vessel, client, cargo, status, or location
+- Sample storage location tracking by shelf, row, and position enhancement
 - Edit and update sample records
 - Delete or archive old records
 - Export sample register to Excel or PDF
 - User login and role-based access
-- Dashboard summary of received samples
+- Dashboard summary metrics
 - Monthly sample movement report
 - Dockerized deployment
 - CI/CD pipeline with GitHub Actions
 - Database backup automation
 - Cloud deployment
+
+---
+
+## Progress Milestones
+
+- Refactored the app from a monolithic prototype into a structured Node/Express project
+- Implemented unique sequential Lab ID generation backed by SQLite
+- Added quantity-aware sample movement logging for Lomé ↔ Lagos sample workflow
+- Added sample details page and movement history tracking
 
 ---
 
@@ -96,17 +103,25 @@ lab-sample-tracker/
 ├── package-lock.json       # Locked dependency versions
 │
 ├── routes/
-│   └── api.js              # API routes for sample handling
+│   ├── api.js              # API routes for sample handling and movement logging
+│   └── views.js            # View routes
 │
 ├── views/
-│   └── batch-form.ejs      # Sample registration form
+│   ├── index.ejs           # Batch sample registration form
+│   ├── dashboard.ejs       # Registered samples dashboard
+│   └── sample-details.ejs  # Individual sample details and movement history
 │
 ├── public/
-│   ├── css/                # Stylesheets
+│   ├── css/
+│   │   └── style.css       # Stylesheets
 │   └── js/
 │       └── batch-form.js   # Frontend form logic
 │
 ├── db/
-│   └── database.sqlite     # SQLite database file
+│   └── database.js         # SQLite database connection and schema setup
+│
+├── data/
+│   └── tracker.db          # SQLite database file
 │
 └── README.md
+```
