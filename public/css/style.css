@@ -159,3 +159,42 @@ th {
 tr:nth-child(even) {
   background: #f9f9f9;
 }
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.badge-lagos {
+  background: #e8f1ff;
+  color: #1d4ed8;
+}
+
+.badge-lome {
+  background: #e9fff1;
+  color: #15803d;
+}
+
+.badge-retrieved {
+  background: #fff7e6;
+  color: #b45309;
+}
+
+.badge-consumed {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.badge-disposed {
+  background: #fdecea;
+  color: #b42318;
+}
+
+.badge-store {
+  background: #f2f4f7;
+  color: #344054;
+}

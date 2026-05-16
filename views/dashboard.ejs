@@ -15,8 +15,6 @@
       <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Date</th>
             <th>Lab ID</th>
             <th>Sample Description</th>
             <th>Vessel</th>
@@ -27,19 +25,22 @@
             <th>Tank</th>
             <th>Port</th>
             <th>Status</th>
+            <th>Current Location</th>
+            <th>Current Quantity</th>
+            <th>Quantity Unit</th>
+            <th>Movement Count</th>
+            <th>Badge</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <% if (samples.length === 0) { %>
+          <% if (!samples || samples.length === 0) { %>
             <tr>
-              <td colspan="13" style="text-align:center;">No sample records yet.</td>
+              <td colspan="16" style="text-align:center;">No sample records yet.</td>
             </tr>
           <% } else { %>
-            <% samples.forEach((item, index) => { %>
+            <% samples.forEach((item) => { %>
               <tr>
-                <td><%= index + 1 %></td>
-                <td><%= item.date %></td>
                 <td><%= item.labId %></td>
                 <td><%= item.sampleDescription %></td>
                 <td><%= item.vessel %></td>
@@ -50,6 +51,25 @@
                 <td><%= item.source %></td>
                 <td><%= item.port %></td>
                 <td><%= item.status %></td>
+                <td><%= item.currentLocation || '-' %></td>
+                <td><%= item.currentQuantity ?? '-' %></td>
+                <td><%= item.quantityUnit || '-' %></td>
+                <td><%= item.movementCount ?? 0 %></td>
+                <td>
+                  <% if ((item.status || '').includes('Lagos') || (item.currentLocation || '').toUpperCase().includes('LAGOS')) { %>
+                    <span class="badge badge-lagos">In Lagos</span>
+                  <% } else if ((item.status || '').includes('Lomé') || (item.currentLocation || '').toUpperCase().includes('LOME') || (item.currentLocation || '').toUpperCase().includes('LOMÉ')) { %>
+                    <span class="badge badge-lome">In Lomé</span>
+                  <% } else if ((item.status || '').includes('Retrieved')) { %>
+                    <span class="badge badge-retrieved">Retrieved</span>
+                  <% } else if ((item.status || '').includes('Consumed')) { %>
+                    <span class="badge badge-consumed">Consumed</span>
+                  <% } else if ((item.status || '').includes('Disposed')) { %>
+                    <span class="badge badge-disposed">Disposed</span>
+                  <% } else { %>
+                    <span class="badge badge-store">In Store</span>
+                  <% } %>
+                </td>
                 <td><a href="/samples/<%= item.id %>">View</a></td>
               </tr>
             <% }) %>

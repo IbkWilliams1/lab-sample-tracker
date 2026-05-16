@@ -30,11 +30,62 @@ router.get('/', async (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
   try {
-    const samples = await all('SELECT * FROM samples ORDER BY id DESC');
-    res.render('dashboard', { samples });
+    const {
+      q = '',
+      vessel = '',
+      client = '',
+      cargo = '',
+      status = '',
+      location = ''
+    } = req.query;
+
+    let sql = 'SELECT * FROM samples WHERE 1=1';
+    const params = [];
+
+    if (q.trim()) {
+      sql += ' AND (labId LIKE ? OR sampleDescription LIKE ?)';
+      params.push(`%${q.trim()}%`, `%${q.trim()}%`);
+    }
+
+    if (vessel.trim()) {
+      sql += ' AND vessel LIKE ?';
+      params.push(`%${vessel.trim()}%`);
+    }
+
+    if (client.trim()) {
+      sql += ' AND client LIKE ?';
+      params.push(`%${client.trim()}%`);
+    }
+
+    if (cargo.trim()) {
+      sql += ' AND cargo LIKE ?';
+      params.push(`%${cargo.trim()}%`);
+    }
+
+    if (status.trim()) {
+      sql += ' AND status = ?';
+      params.push(status.trim());
+    }
+
+    if (location.trim()) {
+      sql += ' AND currentLocation LIKE ?';
+      params.push(`%${location.trim()}%`);
+    }
+
+    sql += ' ORDER BY id DESC';
+
+    const samples = await all(sql, params);
+
+    res.render('dashboard', {
+      samples,
+      filters: { q, vessel, client, cargo, status, location }
+    });
   } catch (error) {
     console.error('Failed to load dashboard:', error);
-    res.render('dashboard', { samples: [] });
+    res.render('dashboard', {
+      samples: [],
+      filters: { q: '', vessel: '', client: '', cargo: '', status: '', location: '' }
+    });
   }
 });
 
