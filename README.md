@@ -50,18 +50,19 @@ This application provides a foundation for improving:
 - Sample details page for individual records
 - Quantity-aware movement logging
 - Sample movement history tracking
+- Current quantity, location, and movement count tracking
 - SQLite-backed persistence
 - Backend API support for sample handling and movement updates
 
 ### Planned Features
 
 - Search and filter samples by Lab ID, vessel, client, cargo, status, or location
+- Dashboard summary metrics
 - Sample storage location tracking by shelf, row, and position enhancement
 - Edit and update sample records
 - Delete or archive old records
 - Export sample register to Excel or PDF
 - User login and role-based access
-- Dashboard summary metrics
 - Monthly sample movement report
 - Dockerized deployment
 - CI/CD pipeline with GitHub Actions
@@ -76,6 +77,7 @@ This application provides a foundation for improving:
 - Implemented unique sequential Lab ID generation backed by SQLite
 - Added quantity-aware sample movement logging for Lomé ↔ Lagos sample workflow
 - Added sample details page and movement history tracking
+- Introduced sample quantity, location, and movement count tracking
 
 ---
 
@@ -124,4 +126,3 @@ lab-sample-tracker/
 │   └── tracker.db          # SQLite database file
 │
 └── README.md
-```
